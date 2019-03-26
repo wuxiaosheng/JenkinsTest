@@ -19,7 +19,6 @@ def copyAssest(rootPath, srcPath, dstPath):
 	shutil.copytree(JSScriptPath+"/script", rootPath+"/../frameworks/runtime-src/proj.android-studio/app/assets/script")
 	shutil.copytree(rootPath+"/../src", rootPath+"/../frameworks/runtime-src/proj.android-studio/app/assets/src")
 	#os.system("cocos.py jscompile -s "+srcPath+"src"+" -d "+dstPath+"src")
-	print 'compile script complete'
 	shutil.copytree(rootPath+"/../res", rootPath+"/../frameworks/runtime-src/proj.android-studio/app/assets/res")
 	print 'assets copy complete'
 	
@@ -27,7 +26,7 @@ def runGradle(rootPath):
 	os.chdir(rootPath+"/../frameworks/runtime-src/proj.android-studio/")
 	os.system("gradle aR")
 	os.chdir(rootPath+"/../frameworks/runtime-src/proj.android-studio/app/build/outputs/apk/release/")
-	print "package complete"
+	print "build gradle complete"
 	
 def createApk(srcPath):
 	if not os.path.exists(srcPath+"apk"):
@@ -50,4 +49,3 @@ if __name__ == "__main__":
 	runGradle(rootPath)
 	
 	createApk(srcPath)
-	
