@@ -4,11 +4,24 @@ android {
     compileSdkVersion 25
     buildToolsVersion "26.0.2"
     defaultConfig {
-        applicationId "com.package.test"
+        applicationId "com.jenkins.test"
         minSdkVersion 10
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+		
+		externalNativeBuild {
+            ndkBuild {
+                targets 'cocos2djs'
+                arguments '-j' + Runtime.runtime.availableProcessors()
+                abiFilters 'armeabi'
+			}
+		}
+		
+		ndk {
+			moduleName "libcocos2djs"
+            abiFilters 'armeabi'
+        }
     }
 
     sourceSets.main {
@@ -17,6 +30,12 @@ android {
         jniLibs.srcDir "libs"
         manifest.srcFile "AndroidManifest.xml"
         assets.srcDir "assets"
+    }
+	
+	externalNativeBuild {
+        ndkBuild {
+            path "jni/Android.mk"
+        }
     }
 
     signingConfigs {
